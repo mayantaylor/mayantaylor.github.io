@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="stylesheets/styles.css" />
     <link rel="stylesheet" href="stylesheets/pygment_trac.css" />
     <meta name="viewport" content="width=device-width" />
+    <style>
+      .talk-item--extra {
+        display: none;
+      }
+      .show-more-btn {
+        margin-top: 0em;
+        margin-bottom: 1.5em;
+        background: none;
+        border: 1px solid #4b8bbd;
+        color: #4b8bbd;
+        padding: 0em 0.9em;
+        border-radius: 999px;
+        cursor: pointer;
+        font: inherit;
+      }
+      .show-more-btn:hover {
+        background: rgba(75, 139, 189, 0.08);
+      }
+    </style>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -145,7 +164,7 @@
             <em>CCIMM 2026</em>
         </p> -->
 
-        <p>
+        <p class="talk-item">
           <strong><a href="presentations/CSGF2026.pdf" target="_blank"
             >
             Spatial Dataflow at Wafer Scale: SpMV on the Cerebras WSE
@@ -154,8 +173,17 @@
             <em>2026 CSGF Program Review</em>
         </p>
 
+         <p class="talk-item">
+          <strong><a href="presentations/CCIMM2026.pdf" target="_blank"
+            >
+            SpMV for AMG on the Cerebras Wafer-Scale Engine
+          </a>
+          </strong><br />
+            <em>2026 Colorado Conference on Iterative and Multigrid Methods</em>
+        </p>
 
-        <p>
+
+        <p class="talk-item">
           <strong><a href="presentations/IPDPS-phdforum-poster.pdf" target="_blank"
             >
             Mapping Unstructured Sparse Computation to Dataflow Architectures
@@ -166,7 +194,7 @@
             <em>IPDPS 2026 PhD Forum</em>
         </p>
 
-        <p>
+        <p class="talk-item talk-item--extra">
           <strong>
             
             <a href="presentations/IPDPS-Diffusion.pdf" target="_blank">
@@ -177,34 +205,35 @@
             <em>2026 PDSEC Workshop @ IPDPS</em>
         </p>
       
-        <p>
+        <p class="talk-item talk-item--extra">
           <strong><a href="https://github.com/charmplusplus/charm4py-tutorial2026/tree/main" target="_blank"
             >Charm4Py: A Programming Model for Distributed Adaptive Python</a></strong><br />
             <em>Tutorial @ IPDPS 2026</em>
         </p>
-         <p>
+         <p class="talk-item talk-item--extra">
           <strong><a href="presentations/wormhole-richardson.pdf" target="_blank"
             >Sparse Linear Solvers on Tenstorrent's Dataflow Architecture</a></strong><br />
             <em>2025 CSGF Program Review</em>
         </p>
-         <p>
+         <p class="talk-item talk-item--extra">
           <strong><a href="presentations/diffusion.pdf" target="_blank"
             >Diffusion Load Balancing</a></strong><br />
             <em>2025 JLESC Workshop</em>
         </p>
-        <p>
+        <p class="talk-item talk-item--extra">
           <strong><a href="presentations/cerebras.pdf" target="_blank"
             >Cerebras in HPC</a></strong><br />
             <em>2024 UIUC CAP Seminar</em>
         </p>
-        <p>
+        <p class="talk-item talk-item--extra">
           <strong> <a href="presentations/CkIO_JLESC.pdf" target="_blank"
             >CkIO: Parallel File Input for Over-decomposed Systems</a
           ></strong><br />
           <em>2024 JLESC Workshop</em>
         </p>
-
-         <h1>service</h1>
+        <button id="toggle-talks" class="show-more-btn" type="button" aria-expanded="false">Show more</button>
+        
+        <h1>service</h1>
         <p>
           <strong>ASCENT 2027 (co-located with ICDCN 2027)</strong> <br />
           Technical Program Committee <br />
@@ -241,5 +270,26 @@
     </div>
     
     <script src="javascripts/scale.fix.js"></script>
+    <script>
+      const extraTalks = document.querySelectorAll('.talk-item--extra');
+      const toggleButton = document.getElementById('toggle-talks');
+
+      if (extraTalks.length && toggleButton) {
+        const setExpanded = (expanded) => {
+          extraTalks.forEach((item) => {
+            item.style.display = expanded ? 'block' : 'none';
+          });
+          toggleButton.textContent = expanded ? 'Show less' : 'Show more';
+          toggleButton.setAttribute('aria-expanded', String(expanded));
+        };
+
+        setExpanded(false);
+
+        toggleButton.addEventListener('click', () => {
+          const expanded = toggleButton.getAttribute('aria-expanded') === 'true';
+          setExpanded(!expanded);
+        });
+      }
+    </script>
   </body>
 </html>
